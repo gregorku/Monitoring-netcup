@@ -1,0 +1,27 @@
+###############################################################################
+# Loki - log storage
+###############################################################################
+services:
+
+  loki:
+    image: grafana/loki:${LOKI_VERSION}
+    container_name: loki
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    command:
+      - -config.file=/etc/loki/loki.yml
+    volumes:
+      - ${DATA_DIR}/loki/data:/loki
+      - ../configs/loki/loki.yml:/etc/loki/loki.yml:ro
+    networks:
+      bridge-moje:
+        ipv4_address: ${IP_LOKI}
+      traefik-moje:
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    logging:
+      driver: json-file
+      options:
+        max-size: ${LOG_MAX_SIZE}
+        max-file: "${LOG_MAX_FILES}"

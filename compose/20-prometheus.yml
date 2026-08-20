@@ -1,0 +1,133 @@
+###############################################################################
+#
+# Monitoring-Grafana Project
+#
+# File:
+#   compose/60-prometheus.yml
+#
+# Description:
+#   Prometheus metrics collector.
+#
+#   Internal only. Routed by Traefik's file provider
+#   (configs/traefik/dynamic/prometheus.yml), reachable
+#   only through the "admin" entryPoint (WireGuard wg1)
+#   and protected by BasicAuth. Never attached to a
+#   public router.
+#
+###############################################################################
+
+services:
+
+  prometheus:
+
+    ###########################################################################
+    # Image
+    ###########################################################################
+
+    image: prom/prometheus:${PROMETHEUS_VERSION}
+
+    container_name: prometheus
+
+    hostname: prometheus
+
+    restart: unless-stopped
+
+    security_opt:
+
+      - no-new-privileges:true
+
+    ###########################################################################
+    # Configuration
+    ###########################################################################
+
+    command:
+
+      - --config.file=/etc/prometheus/prometheus.yml
+
+      - --storage.tsdb.path=/prometheus
+
+      - --storage.tsdb.retention.time=${PROMETHEUS_RETENTION}
+
+      #
+      # Served on its own dedicated Traefik entryPoint
+      # (:8445, see configs/traefik/dynamic/prometheus.yml)
+      # -- no subpath, so no route-prefix needed.
+      #
+
+      - --web.external-url=${PROMETHEUS_PUBLIC_URL}
+
+    ###########################################################################
+    # Networks
+    ###########################################################################
+
+    networks:
+
+      bridge-moje:
+        ipv4_address: ${IP_PROMETHEUS}
+
+      #
+      # Reachable by name for Traefik's file provider.
+      # No Docker labels / router -- routing is defined
+      # entirely in configs/traefik/dynamic/prometheus.yml
+      # so Prometheus can never be picked up by the
+      # (public-facing) Docker provider by accident.
+      #
+
+      traefik-moje:
+
+    ###########################################################################
+    # Volumes
+    ###########################################################################
+
+    volumes:
+
+      #
+      # Scrape configuration
+      #
+
+      - ../configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
+      #
+      # Persistent time-series data
+      #
+
+      - ${DATA_DIR}/prometheus/data:/prometheus
+
+    ###########################################################################
+    # Healthcheck
+    ###########################################################################
+
+    healthcheck:
+
+      test:
+
+        - CMD-SHELL
+        - wget -q --spider http://localhost:9090/-/healthy
+
+      interval: 30s
+
+      timeout: 5s
+
+      retries: 5
+
+    ###########################################################################
+    # Labels
+    ###########################################################################
+
+    labels:
+
+      - "com.centurylinklabs.watchtower.enable=true"
+
+    ###########################################################################
+    # Logging
+    ###########################################################################
+
+    logging:
+
+      driver: json-file
+
+      options:
+
+        max-size: ${LOG_MAX_SIZE}
+
+        max-file: "${LOG_MAX_FILES}"

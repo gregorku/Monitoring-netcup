@@ -1,0 +1,156 @@
+###############################################################################
+#
+# Monitoring-Grafana Project
+#
+# File:
+#   compose/50-grafana.yml
+#
+# Description:
+#   Grafana dashboards.
+#
+#   The ONLY service published to the Internet. Exposed
+#   via the Docker provider on the public "websecure"
+#   entryPoint, protected by TLS (Let's Encrypt) and the
+#   public-chain middleware (CrowdSec + rate-limit +
+#   security headers). No BasicAuth here -- Grafana has
+#   its own login screen.
+#
+###############################################################################
+
+services:
+
+  grafana:
+
+    ###########################################################################
+    # Image
+    ###########################################################################
+
+    image: grafana/grafana:${GRAFANA_VERSION}
+
+    container_name: grafana
+
+    hostname: grafana
+
+    restart: unless-stopped
+
+    security_opt:
+
+      - no-new-privileges:true
+
+    ###########################################################################
+    # Configuration
+    ###########################################################################
+
+    environment:
+
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER}
+
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
+
+      GF_SERVER_DOMAIN: ${GRAFANA_DOMAIN}
+
+      GF_SERVER_ROOT_URL: https://${GRAFANA_DOMAIN}/
+
+      #
+      # This container sits behind Traefik, which
+      # terminates TLS.
+      #
+
+      GF_SERVER_PROTOCOL: http
+
+      #
+      # Disable outbound telemetry / update checks.
+      #
+
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+
+      #
+      # No public self-signup. Admin creates users, or
+      # you provision them separately.
+      #
+
+      GF_USERS_ALLOW_SIGN_UP: "false"
+
+      TZ: ${TZ}
+
+    ###########################################################################
+    # Networks
+    ###########################################################################
+
+    networks:
+
+      bridge-moje:
+        ipv4_address: ${IP_GRAFANA}
+
+      traefik-moje:
+
+    ###########################################################################
+    # Volumes
+    ###########################################################################
+
+    volumes:
+
+      - ../configs/grafana/grafana.ini:/etc/grafana/grafana.ini:ro
+
+      - ../configs/grafana/provisioning:/etc/grafana/provisioning:ro
+
+      - ../configs/grafana/dashboards:/var/lib/grafana/dashboards:ro
+
+      - ${DATA_DIR}/grafana/data:/var/lib/grafana
+
+    ###########################################################################
+    # Healthcheck
+    ###########################################################################
+
+    healthcheck:
+
+      test:
+
+        - CMD-SHELL
+        - wget -q --spider http://localhost:3000/api/health
+
+      interval: 20s
+
+      timeout: 5s
+
+      retries: 10
+
+    ###########################################################################
+    # Traefik (public)
+    ###########################################################################
+
+    labels:
+
+      - traefik.enable=true
+
+      - traefik.docker.network=traefik-moje
+
+      - traefik.http.routers.grafana.rule=Host(`${GRAFANA_DOMAIN}`)
+
+      - traefik.http.routers.grafana.entrypoints=websecure
+
+      - traefik.http.routers.grafana.tls=true
+
+      - traefik.http.routers.grafana.tls.certresolver=letsencrypt
+
+      - traefik.http.routers.grafana.middlewares=public-chain@file
+
+      - traefik.http.services.grafana.loadbalancer.server.port=3000
+
+      - "com.centurylinklabs.watchtower.enable=true"
+
+    ###########################################################################
+    # Logging
+    ###########################################################################
+
+    logging:
+
+      driver: json-file
+
+      options:
+
+        max-size: ${LOG_MAX_SIZE}
+
+        max-file: "${LOG_MAX_FILES}"
