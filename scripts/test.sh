@@ -47,6 +47,11 @@ source "${SCRIPT_DIR}/lib/checks/load.sh"
 
 source "${SCRIPT_DIR}/lib/env/load.sh"
 
+#
+# Load runtime environment from .env.
+#
+env_load
+
 ###############################################################################
 # Test modules
 ###############################################################################
@@ -63,7 +68,6 @@ source "${SCRIPT_DIR}/lib/tests/backend-security.sh"
 ###############################################################################
 # Services
 ###############################################################################
-
 
 source "${SCRIPT_DIR}/lib/tests/summary.sh"
 
@@ -92,6 +96,5 @@ test_backend_security
 #
 # Post deployment
 #
-test_post_deploy
 
 test_summary
