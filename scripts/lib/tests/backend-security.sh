@@ -14,20 +14,30 @@ test_backend_security()
 {
     print_section "Backend exposure"
 
-    local ports=(
-        "${GRAFANA_PORT}"
-        "${PROMETHEUS_PORT}"
-        "${ALERTMANAGER_PORT}"
-        "${LOKI_PORT}"
-        "${ALLOY_PORT}"
-    )
-
+    local monitoring_host_ip
+    local ports
     local port
 
+    monitoring_host_ip="$(env_get MONITORING_HOST_IP)"
+
+    ports=(
+        "$(env_get GRAFANA_PORT)"
+        "$(env_get PROMETHEUS_PORT)"
+        "$(env_get ALERTMANAGER_PORT)"
+        "$(env_get LOKI_PORT)"
+        "$(env_get ALLOY_PORT)"
+    )
+
     for port in "${ports[@]}"; do
-        docker ps --format '{{.Ports}}'             | grep -Eq "(^|, )${MONITORING_HOST_IP}:${port}->"             || fail "Port ${port} is not bound to ${MONITORING_HOST_IP}."
+
+        docker ps --format '{{.Ports}}' \
+            | grep -Eq "(^|, )${monitoring_host_ip}:${port}->" \
+            || fail "Port ${port} is not bound to ${monitoring_host_ip}."
+
     done
 
-    ok "Application backends are bound to ${MONITORING_HOST_IP}."
-    log_info "Final access control is provided by the Infrastructure-netcup firewall and Traefik BasicAuth."
+    ok "Application backends are bound to ${monitoring_host_ip}."
+
+    log_info \
+        "Final access control is provided by the Infrastructure-netcup firewall and Traefik BasicAuth."
 }
