@@ -12,6 +12,10 @@ services:
     command:
       - --config.file=/etc/alertmanager/alertmanager.yml
       - --storage.path=/alertmanager
+    ports:
+
+      - "${MONITORING_HOST_IP}:9093:9093"
+
     volumes:
       - ${DATA_DIR}/alertmanager/data:/alertmanager
       - ../configs/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
@@ -21,13 +25,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      bridge-moje:
+
+      monitoring-netcup:
         ipv4_address: ${IP_ALERTMANAGER}
-      traefik-moje:
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-    logging:
-      driver: json-file
-      options:
-        max-size: ${LOG_MAX_SIZE}
-        max-file: "${LOG_MAX_FILES}"
+

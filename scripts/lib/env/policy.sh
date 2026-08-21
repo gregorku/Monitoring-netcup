@@ -2,27 +2,9 @@
 
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
-# File:
-#   scripts/lib/env/policy.sh
-#
-# Description:
-#   Environment variable policies.
-#
-###############################################################################
-
-###############################################################################
-# Policies
-#
-# framework
-#   Always synchronized from .env.example.
-#
-# user
-#   Keep user value if already configured.
-#
-# generated
-#   Never overwrite automatically generated values.
+# Environment variable policies.
 #
 ###############################################################################
 
@@ -41,45 +23,16 @@ ENV_POLICY[TZ]="user"
 ENV_POLICY[COMPOSE_PROJECT_NAME]="framework"
 
 ###############################################################################
-# Traefik
+# Monitoring host / backend ports
 ###############################################################################
 
-ENV_POLICY[TRAEFIK_VERSION]="framework"
-ENV_POLICY[TRAEFIK_ACME_EMAIL]="user"
-ENV_POLICY[TRAEFIK_DOMAIN]="user"
+ENV_POLICY[MONITORING_HOST_IP]="user"
 
-###############################################################################
-# CrowdSec
-###############################################################################
-
-ENV_POLICY[CROWDSEC_VERSION]="framework"
-ENV_POLICY[CROWDSEC_BOUNCER_KEY]="generated"
-ENV_POLICY[CROWDSEC_DB_NAME]="user"
-ENV_POLICY[CROWDSEC_DB_USER]="user"
-ENV_POLICY[CROWDSEC_DB_PASSWORD]="user"
-ENV_POLICY[METABASE_RO_USER]="user"
-ENV_POLICY[METABASE_RO_PASSWORD]="user"
-
-###############################################################################
-# Metabase
-###############################################################################
-
-ENV_POLICY[METABASE_VERSION]="framework"
-
-ENV_POLICY[PUBLIC_ADMIN_URL]="user"
-ENV_POLICY[METABASE_PUBLIC_URL]="user"
-
-ENV_POLICY[POSTGRES_VERSION]="framework"
-
-ENV_POLICY[METABASE_DB_NAME]="user"
-ENV_POLICY[METABASE_DB_USER]="user"
-ENV_POLICY[METABASE_DB_PASSWORD]="user"
-
-###############################################################################
-# Watchtower
-###############################################################################
-
-ENV_POLICY[WATCHTOWER_VERSION]="framework"
+ENV_POLICY[GRAFANA_PORT]="framework"
+ENV_POLICY[PROMETHEUS_PORT]="framework"
+ENV_POLICY[ALERTMANAGER_PORT]="framework"
+ENV_POLICY[LOKI_PORT]="framework"
+ENV_POLICY[ALLOY_PORT]="framework"
 
 ###############################################################################
 # Grafana
@@ -112,6 +65,7 @@ ENV_POLICY[IP_SNMP_EXPORTER]="user"
 ###############################################################################
 
 ENV_POLICY[ALERTMANAGER_VERSION]="framework"
+ENV_POLICY[ALERTMANAGER_PUBLIC_URL]="user"
 ENV_POLICY[IP_ALERTMANAGER]="user"
 
 ###############################################################################
@@ -129,18 +83,6 @@ ENV_POLICY[ALLOY_VERSION]="framework"
 ENV_POLICY[IP_ALLOY]="user"
 
 ###############################################################################
-# Static IP addresses
-###############################################################################
-
-ENV_POLICY[IP_TRAEFIK]="user"
-ENV_POLICY[IP_CROWDSEC]="user"
-ENV_POLICY[IP_METABASE]="user"
-ENV_POLICY[IP_POSTGRES_METABASE]="user"
-ENV_POLICY[IP_POSTGRES_CROWDSEC]="user"
-
-ENV_POLICY[IP_TRAEFIK_PUBLIC]="user"
-
-###############################################################################
 # Persistent data
 ###############################################################################
 
@@ -155,10 +97,6 @@ ENV_POLICY[LOG_MAX_FILES]="framework"
 
 ###############################################################################
 # Return variable policy
-#
-# Arguments:
-#   $1 - Variable name
-#
 ###############################################################################
 
 env_variable_policy()
@@ -170,10 +108,6 @@ env_variable_policy()
 
 ###############################################################################
 # Variable exists in policy
-#
-# Arguments:
-#   $1 - Variable name
-#
 ###############################################################################
 
 env_is_known_variable()

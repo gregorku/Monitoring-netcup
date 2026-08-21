@@ -2,13 +2,13 @@
 
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   scripts/lib/deploy/verify.sh
 #
 # Description:
-#   Verify Monitoring-Grafana project before deployment.
+#   Verify Monitoring-netcup project before deployment.
 #
 ###############################################################################
 

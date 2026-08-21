@@ -2,7 +2,7 @@
 #
 ###############################################################################
 #
-# Monitoring-Grafana
+# Monitoring-netcup
 #
 # SNMP Exporter Builder
 #
@@ -24,7 +24,7 @@ readonly MODULE_DIR="${SCRIPT_DIR}/modules"
 
 readonly OUTPUT_FILE="${SCRIPT_DIR}/snmp.yml"
 
-readonly STACK_DIR="/docker-data/stacks/monitoring-grafana/configs/snmp-exporter"
+readonly STACK_DIR="/docker-data/stacks/monitoring-netcup/configs/snmp-exporter"
 
 readonly STACK_FILE="${STACK_DIR}/snmp.yml"
 
@@ -125,7 +125,7 @@ cat <<EOF
 
 ==============================================================
 
- Monitoring-Grafana
+ Monitoring-netcup
 
  SNMP Exporter Builder ${VERSION}
 
@@ -347,7 +347,7 @@ cat > "${TMP_FILE}" <<EOF
 #
 # AUTO GENERATED FILE
 #
-# Monitoring-Grafana
+# Monitoring-netcup
 #
 # Generated: $(date -u '+%Y-%m-%dT%H:%M:%SZ')
 #

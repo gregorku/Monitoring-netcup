@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   compose/30-snmp-exporter.yml
@@ -44,12 +44,9 @@ services:
 
     networks:
 
-      bridge-moje:
+      monitoring-netcup:
         ipv4_address: ${IP_SNMP_EXPORTER}
 
-    labels:
-
-      - "com.centurylinklabs.watchtower.enable=true"
 
     logging:
 

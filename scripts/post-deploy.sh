@@ -60,7 +60,7 @@ source "${SCRIPT_DIR}/lib/post-deploy/summary.sh"
 # Main
 ###############################################################################
 
-print_header "Monitoring-Grafana post deployment"
+print_header "Monitoring-netcup post deployment"
 
 #
 # Verify environment.

@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   scripts/check-env.sh
@@ -43,7 +43,7 @@ source "${SCRIPT_DIR}/lib/env/load.sh"
 # Main
 ###############################################################################
 
-print_header "Monitoring-Grafana Environment Check"
+print_header "Monitoring-netcup Environment Check"
 
 check_environment
 

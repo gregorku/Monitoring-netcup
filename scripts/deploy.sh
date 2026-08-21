@@ -2,18 +2,18 @@
 
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   scripts/deploy.sh
 #
 # Description:
-#   Deploy Monitoring-Grafana services.
+#   Deploy Monitoring-netcup services.
 #
 # Responsibilities:
 #   - Verify deployment environment
 #   - Deploy Dockge
-#   - Deploy Monitoring-Grafana Docker Compose stack
+#   - Deploy Monitoring-netcup Docker Compose stack
 #   - Print deployment summary
 #
 ###############################################################################

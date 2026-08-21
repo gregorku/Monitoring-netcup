@@ -14,6 +14,10 @@ services:
       - --server.http.listen-addr=0.0.0.0:12345
       - --storage.path=/var/lib/alloy/data
       - /etc/alloy/config.alloy
+    ports:
+
+      - "${MONITORING_HOST_IP}:12345:12345"
+
     volumes:
       - ../configs/alloy/config.alloy:/etc/alloy/config.alloy:ro
       - ${DATA_DIR}/alloy/data:/var/lib/alloy/data
@@ -22,13 +26,7 @@ services:
       loki:
         condition: service_started
     networks:
-      bridge-moje:
+
+      monitoring-netcup:
         ipv4_address: ${IP_ALLOY}
-      traefik-moje:
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-    logging:
-      driver: json-file
-      options:
-        max-size: ${LOG_MAX_SIZE}
-        max-file: "${LOG_MAX_FILES}"
+

@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   scripts/lib/docker.sh
@@ -139,7 +139,7 @@ docker_start() {
 # Network exists
 #
 # Usage:
-#   docker_network_exists bridge-moje
+#   docker_network_exists monitoring-netcup
 #
 ###############################################################################
 

@@ -2,13 +2,13 @@
 
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   scripts/lib/logging.sh
 #
 # Description:
-#   Common logging functions used by all Monitoring-Grafana scripts.
+#   Common logging functions used by all Monitoring-netcup scripts.
 #
 ###############################################################################
 # Internal logging functions

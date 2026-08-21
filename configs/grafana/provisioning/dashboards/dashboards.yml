@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   configs/grafana/provisioning/dashboards/dashboards.yml
@@ -11,7 +11,7 @@ apiVersion: 1
 
 providers:
 
-  - name: Monitoring-Grafana
+  - name: Monitoring-netcup
 
     orgId: 1
 

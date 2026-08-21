@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   scripts/lib/git.sh

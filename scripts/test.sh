@@ -58,14 +58,13 @@ source "${SCRIPT_DIR}/lib/tests/compose.sh"
 source "${SCRIPT_DIR}/lib/tests/docker.sh"
 source "${SCRIPT_DIR}/lib/tests/dockge.sh"
 source "${SCRIPT_DIR}/lib/tests/networks.sh"
-source "${SCRIPT_DIR}/lib/tests/dashboard-security.sh"
+source "${SCRIPT_DIR}/lib/tests/backend-security.sh"
 
 ###############################################################################
 # Services
 ###############################################################################
 
 
-source "${SCRIPT_DIR}/lib/tests/post-deploy.sh"
 source "${SCRIPT_DIR}/lib/tests/summary.sh"
 
 ###############################################################################
@@ -84,7 +83,7 @@ test_compose
 test_docker
 test_dockge
 test_networks
-test_dashboard_security
+test_backend_security
 
 ###############################################################################
 # Services

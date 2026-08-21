@@ -1,55 +1,22 @@
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
-# File:
-#   compose.yml
+# Main Docker Compose entry point.
 #
-# Description:
-#   Main Docker Compose entry point.
-#
-# Repository:
-#   https://github.com/gregorku/Monitoring-Grafana
-#
-# Requirements:
-#   Docker Compose v2.20+
+# Traefik is NOT part of this stack. Reverse proxying is handled by the
+# separate Infrastructure-netcup Incus container at 10.10.10.10.
 #
 ###############################################################################
 
-name: monitoring-grafana
+name: monitoring-netcup
 
 include:
 
-  ###########################################################################
-  # Docker Networks
-  ###########################################################################
-
   - compose/00-networks.yml
-
-  ###########################################################################
-  # Reverse Proxy
-  ###########################################################################
-
-  - compose/10-traefik.yml
-
-  ###########################################################################
-  # Metrics
-  ###########################################################################
-
   - compose/20-prometheus.yml
-
   - compose/30-snmp-exporter.yml
-
   - compose/40-alertmanager.yml
-
-  - compose/60-loki.yml
-
-  - compose/70-alloy.yml
- 
-  ###########################################################################
-  # Dashboards (public)
-  ###########################################################################
-
   - compose/50-grafana.yml
-
-
+  - compose/60-loki.yml
+  - compose/70-alloy.yml

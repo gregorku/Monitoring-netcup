@@ -1,21 +1,23 @@
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
-# File:
-#   compose/00-networks.yml
-#
-# Description:
-#   External Docker networks.
+# Docker network used only inside the Monitoring-netcup Incus container.
+# Traefik is external and runs in Infrastructure-netcup.
 #
 ###############################################################################
 
 networks:
 
-  bridge-moje:
-    external: true
-    name: bridge-moje
+  monitoring-netcup:
 
-  traefik-moje:
-    external: true
-    name: traefik-moje
+    name: monitoring-netcup
+
+    driver: bridge
+
+    ipam:
+
+      config:
+
+        - subnet: 10.40.0.0/16
+          gateway: 10.40.0.1

@@ -2,13 +2,13 @@
 
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   scripts/lib/deploy/sync.sh
 #
 # Description:
-#   Synchronize the Monitoring-Grafana repository to the Docker stack directory.
+#   Synchronize the Monitoring-netcup repository to the Docker stack directory.
 #
 ###############################################################################
 

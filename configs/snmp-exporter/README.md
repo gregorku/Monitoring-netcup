@@ -1,6 +1,6 @@
 # SNMP Exporter
 
-Konfigurace projektu Monitoring-Grafana pro SNMP Exporter.
+Konfigurace projektu Monitoring-netcup pro SNMP Exporter.
 
 ---
 
@@ -224,4 +224,4 @@ generator/generator.yml
 
 ## Licence
 
-Monitoring-Grafana
+Monitoring-netcup

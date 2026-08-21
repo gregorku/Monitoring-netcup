@@ -41,7 +41,7 @@ source "${SCRIPT_DIR}/lib/docker-compose.sh"
 show_help()
 {
 cat <<EOF
-Monitoring-Grafana Project
+Monitoring-netcup Project
 
 Usage:
 

@@ -16,7 +16,7 @@
 
 deploy_sync_stack() {
     print_section "Synchronize stack"
-    log_info "Synchronizing Monitoring-Grafana stack..."
+    log_info "Synchronizing Monitoring-netcup stack..."
 
     mkdir -p "${STACK_DIR}"
 
@@ -54,5 +54,5 @@ deploy_sync_stack() {
         log_info "Synchronized ${item}"
     done
 
-    log_success "Monitoring-Grafana stack synchronized."
+    log_success "Monitoring-netcup stack synchronized."
 }

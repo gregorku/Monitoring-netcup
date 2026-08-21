@@ -81,13 +81,9 @@ readonly DEPLOY_ITEMS=(
 # Docker networks
 ###############################################################################
 
-readonly NETWORK_INTERNAL="bridge-moje"
+readonly NETWORK_INTERNAL="monitoring-netcup"
 readonly NETWORK_INTERNAL_SUBNET="10.40.0.0/16"
 readonly NETWORK_INTERNAL_GATEWAY="10.40.0.1"
-
-readonly NETWORK_TRAEFIK="traefik-moje"
-readonly NETWORK_TRAEFIK_SUBNET="100.40.0.0/16"
-readonly NETWORK_TRAEFIK_GATEWAY="100.40.0.1"
 
 ###############################################################################
 # Colors

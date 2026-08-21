@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   compose/20-prometheus.yml
@@ -8,11 +8,9 @@
 # Description:
 #   Prometheus metrics collector.
 #
-#   Internal only. Routed by Traefik's file provider
-#   (configs/traefik/dynamic/prometheus.yml), reachable
-#   only through the "admin" entryPoint (WireGuard wg1)
-#   and protected by BasicAuth. Never attached to a
-#   public router.
+#   Internal only. Routed by the external Infrastructure-netcup Traefik through
+#   entryPoint :8445. Access is restricted to WireGuard clients and
+#   protected by BasicAuth in Infrastructure-netcup.
 #
 ###############################################################################
 
@@ -50,7 +48,7 @@ services:
 
       #
       # Served on its own dedicated Traefik entryPoint
-      # (:8445, see configs/traefik/dynamic/prometheus.yml)
+      # (:8445, see Infrastructure-netcup Traefik)
       # -- no subpath, so no route-prefix needed.
       #
 
@@ -62,22 +60,13 @@ services:
 
     networks:
 
-      bridge-moje:
+      monitoring-netcup:
         ipv4_address: ${IP_PROMETHEUS}
 
-      #
-      # Reachable by name for Traefik's file provider.
-      # No Docker labels / router -- routing is defined
-      # entirely in configs/traefik/dynamic/prometheus.yml
-      # so Prometheus can never be picked up by the
-      # (public-facing) Docker provider by accident.
-      #
 
-      traefik-moje:
+    ports:
 
-    ###########################################################################
-    # Volumes
-    ###########################################################################
+      - "${MONITORING_HOST_IP}:9090:9090"
 
     volumes:
 
@@ -110,13 +99,6 @@ services:
 
       retries: 5
 
-    ###########################################################################
-    # Labels
-    ###########################################################################
-
-    labels:
-
-      - "com.centurylinklabs.watchtower.enable=true"
 
     ###########################################################################
     # Logging

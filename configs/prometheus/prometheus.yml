@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   configs/prometheus/prometheus.yml
@@ -33,7 +33,7 @@ scrape_configs:
   # Traefik
   #
   # Requires the "metrics" entryPoint (:8082) and
-  # metrics.prometheus block in configs/traefik/traefik.yml
+  # metrics.prometheus block in Infrastructure-netcup Traefik
   # (already enabled).
   ###########################################################################
 
@@ -42,7 +42,7 @@ scrape_configs:
     static_configs:
 
       - targets:
-          - traefik:8082
+          - 10.10.10.10:8082
 
   ###########################################################################
   # CrowdSec
@@ -60,7 +60,7 @@ scrape_configs:
     static_configs:
 
       - targets:
-          - crowdsec:6060
+          - 10.10.10.10:6060
 
   ###########################################################################
   # Node exporter (VPS / OS metriky serveru)
@@ -221,7 +221,7 @@ scrape_configs:
   #     static_configs:
   #
   #       - targets:
-  #           - jmeno-kontejneru:port    # pokud je na stejné síti (bridge-moje / traefik-moje)
+  #           - jmeno-kontejneru:port    # pokud je na stejné síti (monitoring-netcup)
   #           - 192.168.1.50:9100        # nebo IP adresa/port, pokud je to mimo Docker (třeba node_exporter na jiném stroji)
   #
   # metrics_path je potřeba jen pokud služba neexpozuje
