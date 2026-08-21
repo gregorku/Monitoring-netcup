@@ -2,13 +2,13 @@
 
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   scripts/reload.sh
 #
 # Description:
-#   Reload Monitoring-Grafana containers.
+#   Reload Monitoring-netcup containers.
 #
 ###############################################################################
 
@@ -57,7 +57,7 @@ Options:
 
 Description:
 
-    Reload the Monitoring-Grafana Docker stack.
+    Reload the Monitoring-netcup Docker stack.
 
 EOF
 }
@@ -83,7 +83,7 @@ case "${1:-}" in
         ;;
 esac
 
-print_header "Monitoring-Grafana reload"
+print_header "Monitoring-netcup reload"
 
 ###############################################################################
 # Deploy

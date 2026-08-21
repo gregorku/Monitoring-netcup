@@ -3,7 +3,7 @@
 # Monitoring-Grafana Project
 #
 # File:
-#   compose/70-snmp-exporter.yml
+#   compose/30-snmp-exporter.yml
 #
 # Description:
 #   snmp_exporter -- lets Prometheus scrape SNMP devices

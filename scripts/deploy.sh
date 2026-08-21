@@ -74,7 +74,7 @@ source "${SCRIPT_DIR}/lib/deploy/restart.sh"
 # Main
 ###############################################################################
 
-print_header "Monitoring-Grafana deployment"
+print_header "Monitoring-netcup deployment"
 
 #
 # Verify environment.
@@ -112,7 +112,7 @@ deploy_dockge
 deploy_validate_compose
 
 #
-# Deploy Monitoring-Grafana stack.
+# Deploy Monitoring-netcup stack.
 #
 deploy_compose
 

@@ -3,7 +3,7 @@
 # Monitoring-Grafana Project
 #
 # File:
-#   compose/60-prometheus.yml
+#   compose/20-prometheus.yml
 #
 # Description:
 #   Prometheus metrics collector.

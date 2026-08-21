@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-# Monitoring-Grafana
+# Monitoring-netcup
 #
 # File:
 #   scripts/update-env.sh

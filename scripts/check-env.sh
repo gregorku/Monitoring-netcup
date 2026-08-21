@@ -8,7 +8,7 @@
 #   scripts/check-env.sh
 #
 # Description:
-#   Validate Monitoring-Grafana environment configuration.
+#   Validate Monitoring-netcup environment configuration.
 #
 ###############################################################################
 

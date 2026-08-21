@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   scripts/shellcheck.sh

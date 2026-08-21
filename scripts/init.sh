@@ -2,13 +2,13 @@
 
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   scripts/init.sh
 #
 # Description:
-#   Initialize Monitoring-Grafana project.
+#   Initialize Monitoring-netcup project.
 #
 # Responsibilities:
 #   - Verify environment
@@ -56,22 +56,18 @@ source "${SCRIPT_DIR}/lib/checks/load.sh"
 source "${SCRIPT_DIR}/lib/init/directories.sh"
 source "${SCRIPT_DIR}/lib/init/stack.sh"
 source "${SCRIPT_DIR}/lib/init/networks.sh"
-source "${SCRIPT_DIR}/lib/init/traefik.sh"
-source "${SCRIPT_DIR}/lib/init/crowdsec.sh"
-source "${SCRIPT_DIR}/lib/init/metabase.sh"
 source "${SCRIPT_DIR}/lib/init/grafana.sh"
 source "${SCRIPT_DIR}/lib/init/prometheus.sh"
 source "${SCRIPT_DIR}/lib/init/alertmanager.sh"
 source "${SCRIPT_DIR}/lib/init/loki.sh"
 source "${SCRIPT_DIR}/lib/init/alloy.sh"
-source "${SCRIPT_DIR}/lib/init/watchtower.sh"
 source "${SCRIPT_DIR}/lib/init/summary.sh"
 
 ###############################################################################
 # Main
 ###############################################################################
 
-print_header "Monitoring-Grafana initialization"
+print_header "Monitoring-netcup initialization"
 
 #
 # Verify environment.
@@ -92,21 +88,6 @@ init_stack
 # Create Docker networks.
 #
 init_networks
-
-#
-# Prepare Traefik layout.
-#
-init_traefik
-
-#
-# Prepare CrowdSec layout.
-#
-init_crowdsec
-
-#
-# Prepare Metabase layout.
-#
-init_metabase
 
 #
 # Prepare Grafana layout.
@@ -132,11 +113,6 @@ init_loki
 # Prepare Alloy layout.
 #
 init_alloy
-
-#
-# Prepare Watchtower layout.
-#
-init_watchtower
 
 #
 # Print summary.

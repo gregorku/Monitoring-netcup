@@ -2,13 +2,13 @@
 
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
 #   scripts/test.sh
 #
 # Description:
-#   Run Monitoring-Grafana framework tests.
+#   Run Monitoring-netcup framework tests.
 #
 ###############################################################################
 
@@ -64,18 +64,15 @@ source "${SCRIPT_DIR}/lib/tests/dashboard-security.sh"
 # Services
 ###############################################################################
 
-source "${SCRIPT_DIR}/lib/tests/traefik.sh"
-source "${SCRIPT_DIR}/lib/tests/crowdsec.sh"
-source "${SCRIPT_DIR}/lib/tests/metabase.sh"
+
 source "${SCRIPT_DIR}/lib/tests/post-deploy.sh"
-source "${SCRIPT_DIR}/lib/tests/watchtower.sh"
 source "${SCRIPT_DIR}/lib/tests/summary.sh"
 
 ###############################################################################
 # Main
 ###############################################################################
 
-print_header "Monitoring-Grafana test"
+print_header "Monitoring-netcup test"
 
 check_environment
 check_docker_environment
@@ -92,25 +89,6 @@ test_dashboard_security
 ###############################################################################
 # Services
 ###############################################################################
-
-#
-# Traefik
-#
-test_traefik
-#
-# CrowdSec
-#
-test_crowdsec
-
-#
-# Metabase
-#
-test_metabase
-
-#
-# Watchtower
-#
-test_watchtower
 
 #
 # Post deployment
