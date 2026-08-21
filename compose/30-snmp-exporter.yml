@@ -38,6 +38,10 @@ services:
 
       - no-new-privileges:true
 
+    ports:
+
+      - "${MONITORING_HOST_IP}:9116:9116"
+
     volumes:
 
       - ../configs/snmp-exporter/snmp.yml:/etc/snmp_exporter/snmp.yml:ro
