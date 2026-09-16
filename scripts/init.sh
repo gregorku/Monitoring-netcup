@@ -55,12 +55,12 @@ source "${SCRIPT_DIR}/lib/checks/load.sh"
 
 source "${SCRIPT_DIR}/lib/init/directories.sh"
 source "${SCRIPT_DIR}/lib/init/stack.sh"
-source "${SCRIPT_DIR}/lib/init/networks.sh"
 source "${SCRIPT_DIR}/lib/init/grafana.sh"
 source "${SCRIPT_DIR}/lib/init/prometheus.sh"
 source "${SCRIPT_DIR}/lib/init/alertmanager.sh"
 source "${SCRIPT_DIR}/lib/init/loki.sh"
 source "${SCRIPT_DIR}/lib/init/alloy.sh"
+source "${SCRIPT_DIR}/lib/init/blackbox.sh"
 source "${SCRIPT_DIR}/lib/init/summary.sh"
 
 ###############################################################################
@@ -98,6 +98,11 @@ init_grafana
 # Prepare Prometheus layout.
 #
 init_prometheus
+
+#
+# Prepare Blackbox Exporter layout.
+#
+init_blackbox
 
 #
 # Prepare Alertmanager layout.

@@ -1,3 +1,4 @@
+```bash
 #!/usr/bin/env bash
 
 ###############################################################################
@@ -38,6 +39,29 @@ test_backend_security()
 
     ok "Application backends are bound to ${monitoring_host_ip}."
 
+    #
+    # Blackbox Exporter
+    #
+    # Blackbox Exporter is an internal monitoring service.
+    # Prometheus accesses it through the Docker network using
+    # the container name "blackbox-exporter" on port 9115.
+    #
+    # Port 9115 must therefore NOT be published on the
+    # monitoring host.
+    #
+
+    if docker ps --format '{{.Names}}' \
+        | grep -qx "blackbox-exporter"; then
+
+        docker ps --format '{{.Ports}}' \
+            | grep -Eq "(^|, )${monitoring_host_ip}:9115->" \
+            && fail "Blackbox Exporter port 9115 must not be exposed on ${monitoring_host_ip}."
+
+        ok "Blackbox Exporter is not exposed on ${monitoring_host_ip}."
+
+    fi
+
     log_info \
         "Final access control is provided by the Infrastructure-netcup firewall and Traefik BasicAuth."
 }
+```

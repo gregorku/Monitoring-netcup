@@ -110,6 +110,20 @@ readonly PROMETHEUS_SERVICE="prometheus"
 readonly PROMETHEUS_DIR="${DATA_DIR}/prometheus"
 
 ###############################################################################
+# SNMP exporter
+###############################################################################
+
+readonly SNMP_EXPORTER_SERVICE="snmp-exporter"
+readonly SNMP_EXPORTER_DIR="${DATA_DIR}/snmp-exporter"
+
+###############################################################################
+# Blackbox exporter
+###############################################################################
+
+readonly BLACKBOX_EXPORTER_SERVICE="blackbox-exporter"
+readonly BLACKBOX_EXPORTER_DIR="${DATA_DIR}/blackbox-exporter"
+
+###############################################################################
 # Alertmanager
 ###############################################################################
 

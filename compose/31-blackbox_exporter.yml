@@ -1,9 +1,9 @@
 ###############################################################################
 #
-# Monitoring-Grafana Project
+# Monitoring-netcup Project
 #
 # File:
-#   compose/71-blackbox_exporter.yml
+#   compose/31-blackbox_exporter.yml
 #
 # Description:
 #   blackbox_exporter -- ICMP/TCP/HTTP probing
@@ -46,12 +46,8 @@ services:
 
     networks:
 
-      bridge-moje:
+      monitoring-netcup:
         ipv4_address: ${IP_BLACKBOX_EXPORTER}
-
-    labels:
-
-      - "com.centurylinklabs.watchtower.enable=true"
 
     logging:
 
@@ -61,4 +57,4 @@ services:
 
         max-size: ${LOG_MAX_SIZE}
 
-        max-file: "${LOG_MAX_FILES}"
+        max-file: "${LOG_MAX_FILES}
