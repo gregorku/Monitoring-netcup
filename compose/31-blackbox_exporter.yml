@@ -57,4 +57,5 @@ services:
 
         max-size: ${LOG_MAX_SIZE}
 
-        max-file: "${LOG_MAX_FILES}
+        max-file: "${LOG_MAX_FILES}"
+
