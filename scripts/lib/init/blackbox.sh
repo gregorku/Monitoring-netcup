@@ -1,4 +1,3 @@
-```bash
 #!/usr/bin/env bash
 
 ###############################################################################
@@ -21,4 +20,3 @@ init_blackbox()
 
     ok "Blackbox Exporter layout ready."
 }
-```

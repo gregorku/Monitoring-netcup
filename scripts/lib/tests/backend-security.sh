@@ -1,4 +1,3 @@
-```bash
 #!/usr/bin/env bash
 
 ###############################################################################
@@ -64,4 +63,3 @@ test_backend_security()
     log_info \
         "Final access control is provided by the Infrastructure-netcup firewall and Traefik BasicAuth."
 }
-```
