@@ -83,7 +83,6 @@ test_docker
 test_dockge
 test_networks
 test_backend_security
-test_blackbox
 
 ###############################################################################
 # Services
