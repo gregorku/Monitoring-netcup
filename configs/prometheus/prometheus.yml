@@ -213,6 +213,68 @@ scrape_configs:
       - target_label: __address__
         replacement: snmp-exporter:9116
 
+  ###########################################################################
+  # MikroTik / ICMP ping
+  #
+  # Měří skutečnou ICMP odezvu z monitoringu na všechny MikroTik routery.
+  # Blackbox Exporter musí být dostupný na blackbox-exporter:9115.
+  ###########################################################################
+
+  - job_name: mikrotik_ping
+
+    metrics_path: /probe
+
+    params:
+      module: [icmp]
+
+    static_configs:
+
+      - targets:
+          - 10.100.100.5
+        labels:
+          name: "Mikrotik_test_prace"
+
+      - targets:
+          - 10.100.100.10
+        labels:
+          name: "Mikrotik_bratrmach"
+
+      - targets:
+          - 10.100.100.12
+        labels:
+          name: "Mikrotik_prace"
+
+      - targets:
+          - 10.100.100.100
+        labels:
+          name: "Mikrotik_doma"
+
+      - targets:
+          - 10.100.100.200
+        labels:
+          name: "Mikrotik_Udlice"
+
+      - targets:
+          - 10.100.100.210
+        labels:
+          name: "Mikrotik_Klinovec"
+
+      - targets:
+          - 10.100.100.220
+        labels:
+          name: "Mikrotik_jirkov_ubytovna"
+
+    relabel_configs:
+
+      - source_labels: [__address__]
+        target_label: __param_target
+
+      - source_labels: [__param_target]
+        target_label: instance
+
+      - target_label: __address__
+        replacement: blackbox-exporter:9115        
+
 ###########################################################################
   # Cisco switch / SNMP zařízení (přes přesměrovaný port 1161)
   ###########################################################################
