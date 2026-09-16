@@ -16,6 +16,7 @@ include:
   - compose/00-networks.yml
   - compose/20-prometheus.yml
   - compose/30-snmp-exporter.yml
+  - compose/31-blackbox_exporter.yml
   - compose/40-alertmanager.yml
   - compose/50-grafana.yml
   - compose/60-loki.yml
