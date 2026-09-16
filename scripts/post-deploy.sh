@@ -52,8 +52,6 @@ source "${SCRIPT_DIR}/lib/env/load.sh"
 # Post-deployment modules
 ###############################################################################
 
-source "${SCRIPT_DIR}/lib/post-deploy/crowdsec.sh"
-source "${SCRIPT_DIR}/lib/post-deploy/metabase.sh"
 source "${SCRIPT_DIR}/lib/post-deploy/summary.sh"
 
 ###############################################################################
@@ -71,16 +69,6 @@ check_environment
 # Verify Docker.
 #
 check_docker_environment
-
-#
-# Configure CrowdSec.
-#
-post_deploy_crowdsec
-
-#
-# Configure Metabase.
-#
-post_deploy_metabase
 
 #
 # Print summary.
