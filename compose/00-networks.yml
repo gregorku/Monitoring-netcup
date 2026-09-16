@@ -13,11 +13,4 @@ networks:
 
     name: monitoring-netcup
 
-    driver: bridge
-
-    ipam:
-
-      config:
-
-        - subnet: 10.40.0.0/16
-          gateway: 10.40.0.1
+    external: true
