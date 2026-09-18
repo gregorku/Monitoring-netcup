@@ -46,6 +46,8 @@ services:
 
       - --storage.tsdb.retention.time=${PROMETHEUS_RETENTION}
 
+      - --web.enable-admin-api
+
       #
       # Served on its own dedicated Traefik entryPoint
       # (:8445, see Infrastructure-netcup Traefik)
@@ -53,7 +55,6 @@ services:
       #
 
       - --web.external-url=${PROMETHEUS_PUBLIC_URL}
-
     ###########################################################################
     # Networks
     ###########################################################################
