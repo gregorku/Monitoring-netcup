@@ -82,7 +82,7 @@ scrape_configs:
     static_configs:
 
       - targets:
-          - 10.100.100.100:9100
+          - 10.120.100.100:9100
 
   - job_name: node_server_virtPc
 
@@ -100,7 +100,7 @@ scrape_configs:
     static_configs:
 
       - targets:
-          - 10.100.100.100:9134
+          - 10.120.100.100:9134
 
   - job_name: zfs_server_virtPc
 
@@ -118,7 +118,7 @@ scrape_configs:
     static_configs:
 
       - targets:
-          - 10.100.100.100:9633
+          - 10.120.100.100:9633
 
   ###########################################################################
   # Node exporter (hardware / OS metriky serveru)
@@ -129,7 +129,7 @@ scrape_configs:
     static_configs:
 
       - targets:
-          - 10.100.100.5:9100
+          - 10.120.100.5:9100
 
   ###########################################################################
   # ZFS exporter
@@ -140,7 +140,7 @@ scrape_configs:
     static_configs:
 
       - targets:
-          - 10.100.100.5:9134
+          - 10.120.100.5:9134
 
   ###########################################################################
   # Smartctl exporter (S.M.A.R.T. stav disků)
@@ -151,7 +151,7 @@ scrape_configs:
     static_configs:
 
       - targets:
-          - 10.100.100.5:9633
+          - 10.120.100.5:9633
 
   ###########################################################################
   # MikroTik / SNMP zařízení (přes snmp_exporter)
@@ -164,37 +164,37 @@ scrape_configs:
 
     static_configs:
       - targets:
-          - 10.100.100.5
+          - 10.120.100.5
         labels:
           name: "Mikrotik_test_prace"
 
       - targets:
-          - 10.100.100.10
+          - 10.120.100.10
         labels:
           name: "Mikrotik_bratrmach"
 
       - targets:
-          - 10.100.100.12
+          - 10.120.100.12
         labels:
           name: "Mikrotik_prace"
 
       - targets:
-          - 10.100.100.100
+          - 10.120.100.100
         labels:
           name: "Mikrotik_doma"
 
       - targets:
-          - 10.100.100.200
+          - 10.120.100.200
         labels:
           name: "Mikrotik_Udlice"
 
       - targets:
-          - 10.100.100.210
+          - 10.120.100.210
         labels:
           name: "Mikrotik_Klinovec"
 
       - targets:
-          - 10.100.100.220
+          - 10.120.100.220
         labels:
           name: "Mikrotik_jirkov_ubytovna"
 
@@ -230,37 +230,37 @@ scrape_configs:
     static_configs:
 
       - targets:
-          - 10.100.100.5
+          - 10.120.100.5
         labels:
           name: "Mikrotik_test_prace"
 
       - targets:
-          - 10.100.100.10
+          - 10.120.100.10
         labels:
           name: "Mikrotik_bratrmach"
 
       - targets:
-          - 10.100.100.12
+          - 10.120.100.12
         labels:
           name: "Mikrotik_prace"
 
       - targets:
-          - 10.100.100.100
+          - 10.120.100.100
         labels:
           name: "Mikrotik_doma"
 
       - targets:
-          - 10.100.100.200
+          - 10.120.100.200
         labels:
           name: "Mikrotik_Udlice"
 
       - targets:
-          - 10.100.100.210
+          - 10.120.100.210
         labels:
           name: "Mikrotik_Klinovec"
 
       - targets:
-          - 10.100.100.220
+          - 10.120.100.220
         labels:
           name: "Mikrotik_jirkov_ubytovna"
 
@@ -283,7 +283,7 @@ scrape_configs:
     scrape_timeout: 15s
     static_configs:
       - targets:
-          - 10.100.100.220:1161       # Přímé zadání IP s portem 1161
+          - 10.120.100.220:1161       # Přímé zadání IP s portem 1161
         labels:
           name: 'Cisco_Switch_3560'
     metrics_path: /snmp
