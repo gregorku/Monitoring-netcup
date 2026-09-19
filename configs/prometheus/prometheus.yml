@@ -153,7 +153,7 @@ scrape_configs:
 
     static_configs:
       - targets:
-          - 10.120.100.1:9586
+          - 10.10.10.1:9586
         labels:
           name: "netcupVPSServer"
           service: "WireGuard"
