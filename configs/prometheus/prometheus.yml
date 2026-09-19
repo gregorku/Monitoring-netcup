@@ -140,6 +140,25 @@ scrape_configs:
           - 10.120.100.5:9633
 
   ###########################################################################
+  # WireGuard exporter – netcup VPS
+  #
+  # Exporter na netcupVPSServer sbírá wg1, wg2 a wg3.
+  # Endpoint je dostupný přes WG3 síť.
+  ###########################################################################
+
+  - job_name: wireguard
+
+    scrape_interval: 15s
+    scrape_timeout: 10s
+
+    static_configs:
+      - targets:
+          - 10.120.100.1:9586
+        labels:
+          name: "netcupVPSServer"
+          service: "WireGuard"
+
+  ###########################################################################
   # MikroTik / SNMP zařízení (přes snmp_exporter)
   ###########################################################################
 
@@ -205,6 +224,7 @@ scrape_configs:
       # Prometheus skutečně komunikuje se snmp-exporterem
       - target_label: __address__
         replacement: snmp-exporter:9116
+
   ###########################################################################
   # MikroTik / ICMP ping
   #
@@ -268,10 +288,12 @@ scrape_configs:
       - target_label: __address__
         replacement: blackbox-exporter:9115
 
-  # #####################################################################
+  ###########################################################################
   # Cisco Switch / SNMP zařízení (přes přesměrování port 1161)
-  # #####################################################################
+  ###########################################################################
+
   - job_name: "cisco_switch"
+
     scrape_interval: 30s
     scrape_timeout: 15s
 
@@ -282,6 +304,7 @@ scrape_configs:
           name: "Cisco_Switch_3560"
 
     metrics_path: /snmp
+
     params:
       module: [cisco]
 
@@ -309,7 +332,7 @@ scrape_configs:
   #
   #       - targets:
   #           - jmeno-kontejneru:port    # pokud je na stejné síti (monitoring-netcup)
-  #           - 192.168.1.50:9100        # nebo IP adresa/port, pokud je to mimo Docker (třeba node_exporter na jiném stroji)
+  #           - 192.168.1.50:9100        # nebo IP adresa/port, pokud je to mimo Docker
   #
   # metrics_path je potřeba jen pokud služba neexpozuje
   # metriky na výchozí cestě "/metrics".
