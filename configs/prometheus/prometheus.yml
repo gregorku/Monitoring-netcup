@@ -15,6 +15,13 @@ global:
 
   evaluation_interval: 15s
 
+###############################################################################
+# Recording rules
+###############################################################################
+
+rule_files:
+  - /etc/prometheus/wireguard-peers.yml
+
 scrape_configs:
   ###########################################################################
   # Prometheus itself
@@ -143,7 +150,11 @@ scrape_configs:
   # WireGuard exporter – netcup VPS
   #
   # Exporter na netcupVPSServer sbírá wg1, wg2 a wg3.
-  # Endpoint je dostupný přes WG3 síť.
+  #
+  # Endpoint je dostupný přes Incus bridge:
+  #
+  #   10.10.10.1:9586
+  #
   ###########################################################################
 
   - job_name: wireguard
@@ -154,6 +165,7 @@ scrape_configs:
     static_configs:
       - targets:
           - 10.10.10.1:9586
+
         labels:
           name: "netcupVPSServer"
           service: "WireGuard"
@@ -170,36 +182,43 @@ scrape_configs:
     static_configs:
       - targets:
           - 10.120.100.5
+
         labels:
           name: "Mikrotik_test_prace"
 
       - targets:
           - 10.120.100.10
+
         labels:
           name: "Mikrotik_bratrmach"
 
       - targets:
           - 10.120.100.12
+
         labels:
           name: "Mikrotik_prace"
 
       - targets:
           - 10.120.100.100
+
         labels:
           name: "Mikrotik_doma"
 
       - targets:
           - 10.120.100.200
+
         labels:
           name: "Mikrotik_Udlice"
 
       - targets:
           - 10.120.100.210
+
         labels:
           name: "Mikrotik_Klinovec"
 
       - targets:
           - 10.120.100.220
+
         labels:
           name: "Mikrotik_jirkov_ubytovna"
 
@@ -210,18 +229,22 @@ scrape_configs:
 
     relabel_configs:
       # IP MikroTiku předáme SNMP exporteru
+
       - source_labels: [__address__]
         target_label: __param_target
 
       # IP uložíme do samostatného labelu "target"
+
       - source_labels: [__param_target]
         target_label: target
 
       # instance bude název MikroTiku
+
       - source_labels: [name]
         target_label: instance
 
       # Prometheus skutečně komunikuje se snmp-exporterem
+
       - target_label: __address__
         replacement: snmp-exporter:9116
 
@@ -242,36 +265,43 @@ scrape_configs:
     static_configs:
       - targets:
           - 10.120.100.5
+
         labels:
           name: "Mikrotik_test_prace"
 
       - targets:
           - 10.120.100.10
+
         labels:
           name: "Mikrotik_bratrmach"
 
       - targets:
           - 10.120.100.12
+
         labels:
           name: "Mikrotik_prace"
 
       - targets:
           - 10.120.100.100
+
         labels:
           name: "Mikrotik_doma"
 
       - targets:
           - 10.120.100.200
+
         labels:
           name: "Mikrotik_Udlice"
 
       - targets:
           - 10.120.100.210
+
         labels:
           name: "Mikrotik_Klinovec"
 
       - targets:
           - 10.120.100.220
+
         labels:
           name: "Mikrotik_jirkov_ubytovna"
 
@@ -300,6 +330,7 @@ scrape_configs:
     static_configs:
       - targets:
           - 10.120.100.220:1161
+
         labels:
           name: "Cisco_Switch_3560"
 
@@ -331,13 +362,17 @@ scrape_configs:
   #     static_configs:
   #
   #       - targets:
-  #           - jmeno-kontejneru:port    # pokud je na stejné síti (monitoring-netcup)
-  #           - 192.168.1.50:9100        # nebo IP adresa/port, pokud je to mimo Docker
+  #           - jmeno-kontejneru:port
+  #           - 192.168.1.50:9100
   #
   # metrics_path je potřeba jen pokud služba neexpozuje
   # metriky na výchozí cestě "/metrics".
   #
-  # Po úpravě: ./scripts/deploy.sh (recreatne Prometheus,
-  # ten si config znovu načte), nebo jen
-  # "docker exec prometheus kill -HUP 1" pro reload bez restartu.
+  # Po úpravě: ./scripts/deploy.sh
+  #
+  # nebo:
+  #
+  # docker exec prometheus kill -HUP 1
+  #
+  # pro reload bez restartu.
   ###########################################################################
