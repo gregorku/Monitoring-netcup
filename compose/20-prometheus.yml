@@ -15,9 +15,7 @@
 ###############################################################################
 
 services:
-
   prometheus:
-
     ###########################################################################
     # Image
     ###########################################################################
@@ -31,7 +29,6 @@ services:
     restart: unless-stopped
 
     security_opt:
-
       - no-new-privileges:true
 
     ###########################################################################
@@ -39,7 +36,6 @@ services:
     ###########################################################################
 
     command:
-
       - --config.file=/etc/prometheus/prometheus.yml
 
       - --storage.tsdb.path=/prometheus
@@ -60,22 +56,19 @@ services:
     ###########################################################################
 
     networks:
-
       monitoring-netcup:
         ipv4_address: ${IP_PROMETHEUS}
 
-
     ports:
-
       - "${MONITORING_HOST_IP}:9090:9090"
 
     volumes:
-
       #
       # Scrape configuration
       #
 
       - ../configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ../configs/prometheus/wireguard-peers.yml:/etc/prometheus/wireguard-peers.yml:ro
 
       #
       # Persistent time-series data
@@ -88,9 +81,7 @@ services:
     ###########################################################################
 
     healthcheck:
-
       test:
-
         - CMD-SHELL
         - wget -q --spider http://localhost:9090/-/healthy
 
@@ -100,17 +91,14 @@ services:
 
       retries: 5
 
-
     ###########################################################################
     # Logging
     ###########################################################################
 
     logging:
-
       driver: json-file
 
       options:
-
         max-size: ${LOG_MAX_SIZE}
 
         max-file: "${LOG_MAX_FILES}"
