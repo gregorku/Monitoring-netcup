@@ -217,12 +217,6 @@ scrape_configs:
           name: "Mikrotik_doma"
 
       - targets:
-          - 10.120.100.100:1161
-
-        labels:
-          name: "Mikrotik_doma_switch"
-
-      - targets:
           - 10.120.100.200
 
         labels:
@@ -262,6 +256,38 @@ scrape_configs:
         target_label: instance
 
       # Prometheus skutečně komunikuje se snmp-exporterem
+
+      - target_label: __address__
+        replacement: snmp-exporter:9116
+
+  ###########################################################################
+  # MikroTik CRS112 switch / SNMP – omezený modul
+  ###########################################################################
+
+  - job_name: mikrotik_switch
+
+    scrape_timeout: 15s
+
+    static_configs:
+      - targets:
+          - 10.120.100.100:1161
+        labels:
+          name: "Mikrotik_doma_switch"
+
+    metrics_path: /snmp
+
+    params:
+      module: [mikrotik_switch]
+
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+
+      - source_labels: [__param_target]
+        target_label: target
+
+      - source_labels: [name]
+        target_label: instance
 
       - target_label: __address__
         replacement: snmp-exporter:9116

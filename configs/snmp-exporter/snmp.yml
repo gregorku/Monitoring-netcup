@@ -4411,6 +4411,157 @@ modules:
         - labels: []
           labelname: laIndex
 
+    mikrotik_switch:
+      # Omezený modul pro CRS112: základní systémové údaje a provoz rozhraní.
+      # Neprochází rozsáhlý MikroTik enterprise strom .1.3.6.1.4.1.14988.
+      walk:
+      - 1.3.6.1.2.1.2.2.1.1   # ifIndex
+      - 1.3.6.1.2.1.2.2.1.2   # ifDescr
+      - 1.3.6.1.2.1.2.2.1.7   # ifAdminStatus
+      - 1.3.6.1.2.1.2.2.1.8   # ifOperStatus
+      - 1.3.6.1.2.1.2.2.1.10  # ifInOctets
+      - 1.3.6.1.2.1.2.2.1.16  # ifOutOctets
+      - 1.3.6.1.2.1.31.1.1.1.1  # ifName lookup
+      - 1.3.6.1.2.1.31.1.1.1.6  # ifHCInOctets
+      - 1.3.6.1.2.1.31.1.1.1.10 # ifHCOutOctets
+      get:
+      - 1.3.6.1.2.1.1.1.0
+      - 1.3.6.1.2.1.1.3.0
+      - 1.3.6.1.2.1.1.5.0
+      metrics:
+      - name: sysDescr
+        oid: 1.3.6.1.2.1.1.1
+        type: DisplayString
+        help: A textual description of the entity - 1.3.6.1.2.1.1.1
+      - name: sysIdentity
+        oid: 1.3.6.1.2.1.1.5.0
+        type: DisplayString
+        help: A textual description of the system identity - 1.3.6.1.2.1.1.5.0
+      - name: sysUpTime
+        oid: 1.3.6.1.2.1.1.3
+        type: gauge
+        help: The time (in hundredths of a second) since the network management portion
+          of the system was last re-initialized. - 1.3.6.1.2.1.1.3
+      - name: ifIndex
+        oid: 1.3.6.1.2.1.2.2.1.1
+        type: gauge
+        help: A unique value, greater than zero, for each interface - 1.3.6.1.2.1.2.2.1.1
+        indexes:
+        - labelname: ifIndex
+          type: gauge
+        lookups:
+        - labels:
+          - ifIndex
+          labelname: ifName
+          oid: 1.3.6.1.2.1.31.1.1.1.1
+          type: DisplayString
+      - name: ifDescr
+        oid: 1.3.6.1.2.1.2.2.1.2
+        type: DisplayString
+        help: A textual string containing information about the interface - 1.3.6.1.2.1.2.2.1.2
+        indexes:
+        - labelname: ifIndex
+          type: gauge
+        lookups:
+        - labels:
+          - ifIndex
+          labelname: ifName
+          oid: 1.3.6.1.2.1.31.1.1.1.1
+          type: DisplayString
+      - name: ifAdminStatus
+        oid: 1.3.6.1.2.1.2.2.1.7
+        type: gauge
+        help: The desired state of the interface - 1.3.6.1.2.1.2.2.1.7
+        indexes:
+        - labelname: ifIndex
+          type: gauge
+        lookups:
+        - labels:
+          - ifIndex
+          labelname: ifName
+          oid: 1.3.6.1.2.1.31.1.1.1.1
+          type: DisplayString
+        enum_values:
+          1: up
+          2: down
+          3: testing
+      - name: ifOperStatus
+        oid: 1.3.6.1.2.1.2.2.1.8
+        type: gauge
+        help: The current operational state of the interface - 1.3.6.1.2.1.2.2.1.8
+        indexes:
+        - labelname: ifIndex
+          type: gauge
+        lookups:
+        - labels:
+          - ifIndex
+          labelname: ifName
+          oid: 1.3.6.1.2.1.31.1.1.1.1
+          type: DisplayString
+        enum_values:
+          1: up
+          2: down
+          3: testing
+          4: unknown
+          5: dormant
+          6: notPresent
+          7: lowerLayerDown
+      - name: ifInOctets
+        oid: 1.3.6.1.2.1.2.2.1.10
+        type: counter
+        help: The total number of octets received on the interface, including framing
+          characters - 1.3.6.1.2.1.2.2.1.10
+        indexes:
+        - labelname: ifIndex
+          type: gauge
+        lookups:
+        - labels:
+          - ifIndex
+          labelname: ifName
+          oid: 1.3.6.1.2.1.31.1.1.1.1
+          type: DisplayString
+      - name: ifOutOctets
+        oid: 1.3.6.1.2.1.2.2.1.16
+        type: counter
+        help: The total number of octets transmitted out of the interface, including framing
+          characters - 1.3.6.1.2.1.2.2.1.16
+        indexes:
+        - labelname: ifIndex
+          type: gauge
+        lookups:
+        - labels:
+          - ifIndex
+          labelname: ifName
+          oid: 1.3.6.1.2.1.31.1.1.1.1
+          type: DisplayString
+      - name: ifHCInOctets
+        oid: 1.3.6.1.2.1.31.1.1.1.6
+        type: counter
+        help: The total number of octets received on the interface, including framing
+          characters - 1.3.6.1.2.1.31.1.1.1.6
+        indexes:
+        - labelname: ifIndex
+          type: gauge
+        lookups:
+        - labels:
+          - ifIndex
+          labelname: ifName
+          oid: 1.3.6.1.2.1.31.1.1.1.1
+          type: DisplayString
+      - name: ifHCOutOctets
+        oid: 1.3.6.1.2.1.31.1.1.1.10
+        type: counter
+        help: The total number of octets transmitted out of the interface, including framing
+          characters - 1.3.6.1.2.1.31.1.1.1.10
+        indexes:
+        - labelname: ifIndex
+          type: gauge
+        lookups:
+        - labels:
+          - ifIndex
+          labelname: ifName
+          oid: 1.3.6.1.2.1.31.1.1.1.1
+          type: DisplayString
     cisco:
       walk:
       #
