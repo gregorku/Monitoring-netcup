@@ -217,6 +217,12 @@ scrape_configs:
           name: "Mikrotik_doma"
 
       - targets:
+          - 10.120.100.100:1161
+
+        labels:
+          name: "Mikrotik_doma_switch"
+
+      - targets:
           - 10.120.100.200
 
         labels:
